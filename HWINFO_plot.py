@@ -2,21 +2,29 @@ import csv
 import matplotlib.pyplot as plt
 from datetime import datetime
 
-filenames = ["June 9 2023 Prime95 Torture Test Small FFTs Case Closed.CSV",
-             "June 9 2023 Prime95 Torture Test Small FFTs No Sidepanels.CSV",
-             "June 10 2023 Prime95 Torture Test Small FFTs No Sidepanels or front or top.CSV",
-             "June 10 2023 Prime95 Torture Test Small FFTs No Sidepanels or front or top no blowie.CSV"]
+filenames = [#"Win10 Normal OS/June 9 2023 Prime95 Torture Test Small FFTs Case Closed.CSV",
+             #"Win10 Normal OS/June 9 2023 Prime95 Torture Test Small FFTs No Sidepanels.CSV",
+             #"Win10 Normal OS/June 10 2023 Prime95 Torture Test Small FFTs No Sidepanels or front or top.CSV",
+             #"Win10 Normal OS/June 10 2023 Prime95 Torture Test Small FFTs No Sidepanels or front or top no blowie.CSV",
+             "Win11 Benchmark OS/June 10 2023 Prime95 no blower fan.CSV",
+             "Win11 Benchmark OS/June 10 2023 Prime95 no sidepanels no blower fan.CSV",
+             "Win11 Benchmark OS/June 10 2023 Prime95 no sidepanels no top no front no blower fan.CSV",
+             "Win11 Benchmark OS/June 10 2023 Cinebench R23 no sidepanels no top no front no blower fan.CSV"]
 
-legend = ["Prime95 Case Closed",
-          "Prime95 No Sidepanels",
-          "Prime95 No Sidepanels, Top, or Front Panel",
-          "Prime95 No Sidepanels, Top, or Front Panel, No Blower Fan"]
+legend = [#"Prime95 Case Closed",
+          #"Prime95 No Sidepanels",
+          #"Prime95 No Sidepanels, Top, or Front Panel",
+          #"Prime95 No Sidepanels, Top, or Front Panel, No Blower Fan",
+          "Win11 Prime95 No Blower Fan",
+          "Win11 Prime95 No Sidepanels, No Blower Fan",
+          "Win11 Prime95 No Sidepanels, Top, or Front Panel, No Blower Fan",
+          "Win11 Cinebench R23 No Sidepanels, Top, or Front Panel, No Blower Fan"]
 
 number_of_runs = len(filenames)
 
 max_seconds = 600
 
-ignore_first_n_datapoints_for_average = 5
+ignore_first_n_datapoints_for_average = 15
 
 assert (len(filenames) == len(legend)), "different number of filenames and legends"
 
@@ -95,6 +103,7 @@ for i in range(number_of_runs):
     plt.ylabel('CPU Package Temperature (°C)')
     plt.title('CPU Package Temperature Over Time')
     plt.xticks(rotation=45)
+    plt.yticks(tuple(range(10, 105, 5)))
     plt.ylim((10, 105))
     plt.xlim((0, timestamps[i][-1]))
     plt.tight_layout()
@@ -115,6 +124,7 @@ for i in range(number_of_runs):
     plt.ylabel('CPU Package Temperature Delta from Room Temperature (°C)')
     plt.title('CPU Package-Room Delta Temperature Over Time')
     plt.xticks(rotation=45)
+    plt.yticks(tuple(range(0, 90, 5)))
     plt.ylim((0, 90))
     plt.xlim((0, timestamps[i][-1]))
     plt.tight_layout()
@@ -138,6 +148,7 @@ for i in range(number_of_runs):
     plt.ylabel('CPU Package Power (W)')
     plt.title('CPU Package Power Over Time')
     plt.xticks(rotation=45)
+    plt.yticks(tuple(range(0, 200, 5)))
     plt.ylim((0, 200))
     plt.xlim((0, timestamps[i][-1]))
     plt.tight_layout()
